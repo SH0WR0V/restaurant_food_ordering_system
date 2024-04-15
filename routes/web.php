@@ -18,6 +18,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('admin/dashboard', [AdminDashboard::class, 'AdminDashboard'])->middleware('auth', 'role:admin')->name('admin.dashboard');
+
+//Admin
+Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+
+    Route::get('dashboard', [AdminDashboard::class, 'AdminDashboard'])->middleware('auth', 'role:admin')->name('dashboard');
+});
 
 require __DIR__ . '/auth.php';
