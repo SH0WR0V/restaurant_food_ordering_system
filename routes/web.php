@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminDashboard;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\ProfileController;
@@ -20,7 +21,7 @@ Route::middleware('auth')->group(function () {
 
 //Admin
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
-
+    Route::get('login', [AdminAuthController::class, 'login'])->name('login');
     Route::get('dashboard', [AdminDashboard::class, 'AdminDashboard'])->middleware('auth', 'role:admin')->name('dashboard');
 });
 
